@@ -1,0 +1,303 @@
+@charset "UTF-8";
+:root {
+  --fz10: calc(10 / 16 * 1rem);
+  --fz11: calc(11 / 16 * 1rem);
+  --fz12: calc(12 / 16 * 1rem);
+  --fz13: calc(13 / 16 * 1rem);
+  --fz14: calc(14 / 16 * 1rem);
+  --fz15: calc(15 / 16 * 1rem);
+  --fz16: calc(16 / 16 * 1rem);
+  --fz17: calc(17 / 16 * 1rem);
+  --fz18: calc(18 / 16 * 1rem);
+  --fz19: calc(19 / 16 * 1rem);
+  --fz20: calc(20 / 16 * 1rem);
+  --fz21: calc(21 / 16 * 1rem);
+  --fz22: calc(22 / 16 * 1rem);
+  --fz23: calc(23 / 16 * 1rem);
+  --fz24: calc(24 / 16 * 1rem);
+  --fz25: calc(25 / 16 * 1rem);
+  --fz26: calc(26 / 16 * 1rem);
+  --fz27: calc(27 / 16 * 1rem);
+  --fz28: calc(28 / 16 * 1rem);
+  --fz29: calc(29 / 16 * 1rem);
+  --fz30: calc(30 / 16 * 1rem);
+  --fz31: calc(31 / 16 * 1rem);
+  --fz32: calc(32 / 16 * 1rem);
+  --fz33: calc(33 / 16 * 1rem);
+  --fz34: calc(34 / 16 * 1rem);
+  --fz35: calc(35 / 16 * 1rem);
+  --fz36: calc(36 / 16 * 1rem);
+  --fz37: calc(37 / 16 * 1rem);
+  --fz38: calc(38 / 16 * 1rem);
+  --fz39: calc(39 / 16 * 1rem);
+  --fz40: calc(40 / 16 * 1rem);
+  --fz41: calc(41 / 16 * 1rem);
+  --fz42: calc(42 / 16 * 1rem);
+  --fz43: calc(43 / 16 * 1rem);
+  --fz44: calc(44 / 16 * 1rem);
+  --fz45: calc(45 / 16 * 1rem);
+  --fz46: calc(46 / 16 * 1rem);
+  --fz47: calc(47 / 16 * 1rem);
+  --fz48: calc(48 / 16 * 1rem);
+  --fz49: calc(49 / 16 * 1rem);
+  --fz50: calc(50 / 16 * 1rem);
+  --fz51: calc(51 / 16 * 1rem);
+  --fz52: calc(52 / 16 * 1rem);
+  --fz53: calc(53 / 16 * 1rem);
+  --fz54: calc(54 / 16 * 1rem);
+  --fz55: calc(55 / 16 * 1rem);
+  --fz56: calc(56 / 16 * 1rem);
+  --fz57: calc(57 / 16 * 1rem);
+  --fz58: calc(58 / 16 * 1rem);
+  --fz59: calc(59 / 16 * 1rem);
+  --fz60: calc(60 / 16 * 1rem);
+  --fz61: calc(61 / 16 * 1rem);
+  --fz62: calc(62 / 16 * 1rem);
+  --fz63: calc(63 / 16 * 1rem);
+  --fz64: calc(64 / 16 * 1rem);
+  --fz65: calc(65 / 16 * 1rem);
+  --fz66: calc(66 / 16 * 1rem);
+  --fz67: calc(67 / 16 * 1rem);
+  --fz68: calc(68 / 16 * 1rem);
+  --fz69: calc(69 / 16 * 1rem);
+  --fz70: calc(70 / 16 * 1rem);
+  --fz71: calc(71 / 16 * 1rem);
+  --fz72: calc(72 / 16 * 1rem);
+  --fz73: calc(73 / 16 * 1rem);
+  --fz74: calc(74 / 16 * 1rem);
+  --fz75: calc(75 / 16 * 1rem);
+  --fz76: calc(76 / 16 * 1rem);
+  --fz77: calc(77 / 16 * 1rem);
+  --fz78: calc(78 / 16 * 1rem);
+  --fz79: calc(79 / 16 * 1rem);
+  --fz80: calc(80 / 16 * 1rem);
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  font-family: "Helvetica Neue", "Arial", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "メイリオ", "Meiryo", sans-serif;
+  font-size: 100%;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #000;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: var(--fz18);
+  padding: 10px;
+  border-bottom: 1px solid #33e1b2;
+  box-shadow: 0 0 10px rgba(51, 225, 178, 0.2);
+}
+
+.wrap {
+  padding: 30px min(4vw, 20px);
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: 60px;
+}
+
+.parts_ttl {
+  font-weight: 700;
+  margin-bottom: 10px;
+  border-left: 4px solid #33e1b2;
+  padding-left: 10px;
+  font-size: var(--fz20);
+}
+
+.parts_btn {
+  padding: 5px 10px;
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid #33e1b2;
+  box-shadow: 0 2px 8px rgba(221, 221, 221, 0.5);
+  background-color: rgba(51, 225, 178, 0.5);
+  font-weight: 700;
+}
+.parts_btn:not(.-disable):hover {
+  background-color: #33e1b2;
+}
+.parts_btn:not(.-disable):active {
+  transform: scale(1.1);
+}
+.parts_btn.-disable {
+  background-color: #ddd;
+  border: 1px solid transparent;
+  pointer-events: none;
+  cursor: initial;
+}
+
+.fields_select--btn input[type=radio], .parts_table_field input[type=radio],
+.fields_select--btn input[type=checkbox],
+.parts_table_field input[type=checkbox] {
+  appearance: none;
+  position: absolute;
+}
+.fields_select--btn input[type=radio] + span, .parts_table_field input[type=radio] + span,
+.fields_select--btn input[type=checkbox] + span,
+.parts_table_field input[type=checkbox] + span {
+  display: inline-block;
+  padding: 2px 10px 0;
+  text-align: center;
+  border-radius: 5px;
+  border: 2px solid #dddddd;
+  box-shadow: 0 2px 8px rgba(221, 221, 221, 0.5);
+}
+.fields_select--btn input[type=radio]:checked + span, .parts_table_field input[type=radio]:checked + span,
+.fields_select--btn input[type=checkbox]:checked + span,
+.parts_table_field input[type=checkbox]:checked + span {
+  font-weight: 700;
+  border-color: #33e1b2;
+  background: rgba(51, 225, 178, 0.5);
+  box-shadow: none;
+}
+.fields_select--btn input[type=radio]:checked:hover + span, .parts_table_field input[type=radio]:checked:hover + span,
+.fields_select--btn input[type=checkbox]:checked:hover + span,
+.parts_table_field input[type=checkbox]:checked:hover + span {
+  background-color: #33e1b2;
+}
+.fields_select--btn input[type=radio]:hover + span, .parts_table_field input[type=radio]:hover + span, .fields_select--btn input[type=radio]:focus + span, .parts_table_field input[type=radio]:focus + span,
+.fields_select--btn input[type=checkbox]:hover + span,
+.parts_table_field input[type=checkbox]:hover + span,
+.fields_select--btn input[type=checkbox]:focus + span,
+.parts_table_field input[type=checkbox]:focus + span {
+  border: 2px solid #000;
+}
+
+.parts_details[open] summary::after {
+  transform: rotate(0);
+}
+.parts_details summary {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  padding-right: 10px;
+}
+.parts_details summary::after {
+  content: "";
+  width: 15px;
+  height: 10px;
+  background: #000;
+  clip-path: polygon(100% 0, 0 0, 50% 100%);
+  transform: rotate(90deg);
+}
+.parts_details summary:hover {
+  border-color: #33e1b2;
+}
+.parts_details summary .parts_ttl {
+  margin-bottom: 0;
+}
+
+.parts_table_field {
+  width: 100%;
+  border-bottom: 1px solid #dddddd;
+  padding: 20px 0;
+  border-collapse: separate;
+  margin-bottom: 10px;
+}
+.parts_table_field tr {
+  display: flex;
+  flex-wrap: wrap;
+}
+.parts_table_field tr.-addition {
+  padding: 20px 0;
+  background-color: rgba(51, 225, 178, 0.2);
+}
+.parts_table_field th,
+.parts_table_field td {
+  padding: 2px 10px;
+}
+.parts_table_field th {
+  font-weight: 700;
+  width: calc(8em + 20px);
+  text-align: left;
+}
+.parts_table_field th small {
+  font-size: var(--fz14);
+}
+.parts_table_field td {
+  width: 250px;
+  padding: 5px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 5px;
+  flex-grow: 1;
+}
+.parts_table_field label {
+  width: fit-content;
+}
+.parts_table_field input:not([type=radio], [type=checkbox]),
+.parts_table_field textarea {
+  padding: 5px 10px;
+  border: 1px solid black;
+  box-shadow: 0 2px 8px rgba(221, 221, 221, 0.5);
+  border-radius: 5px;
+}
+.parts_table_field input:not([type=radio], [type=checkbox]):focus,
+.parts_table_field textarea:focus {
+  box-shadow: none;
+  outline-color: #33e1b2;
+}
+.parts_table_field textarea {
+  min-height: 300px;
+}
+.parts_table_field.-copy input:not([type=radio], [type=checkbox]),
+.parts_table_field.-copy textarea {
+  box-shadow: none;
+  border: none;
+  background-color: rgba(51, 225, 178, 0.1);
+}
+.parts_table_field--error {
+  color: red;
+  font-weight: 700;
+  font-size: var(--fz14);
+}
+
+section {
+  margin-bottom: 30px;
+}
+
+.fields_select--btn {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  width: fit-content;
+}
+
+.fields_list--text {
+  padding-left: 1em;
+  font-size: var(--fz14);
+  margin: 10px 0;
+}
+.fields_list--list li {
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 20px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+.fields_list--list dl > div {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  column-gap: 1em;
+}
+.fields_list--list dl > div:nth-child(even) {
+  background-color: rgba(51, 225, 178, 0.1);
+}
+.fields_list--remove {
+  min-width: 55px;
+}
+
+.generated_form table th {
+  width: 0;
+  padding: 0;
+}

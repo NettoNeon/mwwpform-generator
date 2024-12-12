@@ -1,0 +1,19 @@
+@charset "UTF-8";
+@use "sass:map";
+
+// color
+$color-body: #000;
+$color-primary: #33e1b2;
+$color-secondary: #fafad2;
+$color-accent: #ff6347;
+
+// font
+$font-sans: "Helvetica Neue", "Arial", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "メイリオ", "Meiryo", sans-serif;
+$font-serif: "Hiragino Mincho Pro", "ヒラギノ明朝 Pro", "YuMincho", "Yu Mincho", "游明朝体", "MS P明朝", "MS PMincho", "Times New Roman", serif;
+
+// font-size
+:root {
+  @for $var from 10 through 80 {
+    --fz#{$var}: calc(#{$var} / 16 * 1rem);
+  }
+}

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>フォームジェネレーター【CF7 | MW WP Form】</title>
+  <link rel="stylesheet" href="./css/reset.min.css">
+  <link rel="stylesheet" href="./css/style.min.css">
+  <script src="./js/3.3.4-vue.global.prod.min.js"></script>
+  <script src="./js/1.10.2-Sortable.min.js"></script>
+  <script src="./js/4.0.2-vuedraggable.umd.min.js"></script>
+</head>
+
+<body>
+  <h1>フォームジェネレータ【CF7 | MW WP Form】</h1>
+  <div class="wrap" id="generator">
+    <div class="fields">
+      <section class="fields_select">
+        <h2 class="fields_select--ttl parts_ttl">フォームプラグイン</h2>
+        <ul class="fields_select--btn">
+          <li><label><input type="radio" id="cf7" v-model="kinds" value="cf7" @change="createFormPreview();createMail()"><span>Contact Form 7</span></label></li>
+          <li><label><input type="radio" id="mwwp" v-model="kinds" value="mwwp" @change="createFormPreview();createMail()"><span>MW WP Form</span></label></li>
+        </ul>
+      </section>
+      <section class="fields_input">
+        <details class="parts_details" open>
+          <summary>
+            <h2 class="fields_input--ttl parts_ttl">入力フィールド</h2>
+          </summary>
+          <div>
+            <table class="parts_table_field">
+              <tr>
+                <th>会社名</th>
+                <td><input type="text" v-model="mail.company" @input="mailSubject();createMail()"></td>
+              </tr>
+              <tr>
+                <th>メールアドレス<br><small>（送信元）</small></th>
+                <td><input type="email" v-model="mail.email"></td>
+              </tr>
+            </table>
+            <table class="parts_table_field">
+              <tr>
+                <th>表示する文字</th>
+                <td>
+                  <input v-model="new_item.name" type="text">
+                </td>
+              </tr>
+              <tr>
+                <th>スラッグ</th>
+                <td>
+                  <input v-model="new_item.slug" type="text">
+                  <p v-if="isDouble(new_item.slug)" class="parts_table_field--error">重複したスラッグ</p>
+                </td>
+              </tr>
+              <tr>
+                <th>種類</th>
+                <td>
+                  <label v-if="kinds === 'mwwp'"><input type="radio" name="type" v-model="new_item.type" value="text" checked><span>テキスト / 電話番号</span></label>
+                  <label v-if="kinds === 'cf7'"><input type="radio" name="type" v-model="new_item.type" value="text" checked><span>テキスト</span></label>
+                  <label v-if="kinds === 'cf7'"><input type="radio" name="type" v-model="new_item.type" value="tel"><span>電話番号</span></label>
+                  <label v-if="kinds === 'cf7'"><input type="radio" name="type" v-model="new_item.type" value="url"><span>URL</span></label>
+                  <label><input type="radio" name="type" v-model="new_item.type" value="email"><span>メールアドレス</span></label>
+                  <label><input type="radio" name="type" v-model="new_item.type" value="textarea"><span>テキストエリア</span></label>
+                  <label><input type="radio" name="type" v-model="new_item.type" value="radio"><span>ラジオボタン</span></label>
+                  <label><input type="radio" name="type" v-model="new_item.type" value="checkbox"><span>チェックボックス</span></label>
+                  <label><input type="radio" name="type" v-model="new_item.type" value="select"><span>カテゴリーセレクタ</span></label>
+                </td>
+              </tr>
+              <tr v-if="['radio','checkbox','select'].includes(new_item.type)" class="-addition">
+                <th>項目名<br><small>（カンマ区切り）</small></th>
+                <td>
+                  <input type="text" v-model="new_item.select_items" placeholder="a,b,c">
+                </td>
+              </tr>
+              <tr>
+                <th>必須</th>
+                <td>
+                  <label><input type="checkbox" name="required" v-model="new_item.required" value="required"><span>必須にする</span></label>
+                </td>
+              </tr>
+              <tr>
+                <th>プレースホルダー</th>
+                <td><input v-model="new_item.placeholder" type="text"></td>
+              </tr>
+              <tr>
+                <th></th>
+                <td><button class="parts_btn" :class="{ '-disable': isDouble(new_item.slug)||isEmpty() }" @click="addList()">追加</button></td>
+              </tr>
+            </table>
+          </div>
+        </details>
+      </section>
+      <section class="fields_list">
+        <details class="parts_details" open>
+          <summary>
+            <h2 class="fields_list--ttl parts_ttl">要素リスト</h2>
+          </summary>
+          <ul class="fields_list--text">
+            <li>クリックで入力フィールドにコピー</li>
+            <li>ドラッグで並び替え</li>
+          </ul>
+          <draggable class="fields_list--list" v-model="arr_item" :animation="150" @sort="checkMove" @start="drag=true" @end="drag=false" item-key="slug" tag="ul" id="list" class="margin0">
+            <template #item="{ element, index }" v-bind:key="element">
+              <li @click="copyItem(index)">
+                <dl>
+                  <div v-for="(value, key) in element">
+                    <dt>{{key}}</dt>
+                    <dd>{{value}}</dd>
+                  </div>
+                </dl>
+                <button class="fields_list--remove parts_btn" @click.stop="removeList(index)">削除</button>
+              </li>
+            </template>
+          </draggable>
+        </details>
+      </section>
+    </div>
+
+    <div class="generated">
+      <section class="generated_form">
+        <h2 class="generated_form--ttl parts_ttl">お問い合わせフォーム</h2>
+        <table class="parts_table_field -copy">
+          <tr>
+            <th></th>
+            <td><label><input type="checkbox" v-model="form.decoration" @change="changeFormOption()"><span>装飾用のタグを追加</span></label></td>
+          </tr>
+          <tr>
+            <th></th>
+            <td><label><input type="checkbox" v-model="form.button" @change="changeFormOption()"><span>ボタンをbuttonタグに</span></label></td>
+          </tr>
+          <tr v-if="kinds != 'cf7'">
+            <th></th>
+            <td><label><input type="checkbox" v-model="form.confirmStep" @change="changeFormOption()"><span>確認画面へ遷移</span></label>
+            </td>
+          </tr>
+          <tr>
+            <th></th>
+            <td><textarea v-model="form.code" style="height: 400px"></textarea></td>
+          </tr>
+        </table>
+      </section>
+      <section class="generated_reply">
+        <h2 class="generated_reply--ttl parts_ttl">メール(自動返信用)</h2>
+        <table class="parts_table_field -copy">
+          <tr>
+            <th>件名<br>(自動返信用)</th>
+            <td><input type="text" v-model="mail.subject_user"></td>
+          </tr>
+          <tr>
+            <th>送信者</th>
+            <td><input type="text" v-model="mail.email"></td>
+          </tr>
+          <tr class="flex">
+            <th>本文</th>
+            <td>
+              <textarea v-model="mail.content_user"></textarea>
+            </td>
+          </tr>
+          <tr>
+            <th>自動返信<br>メール</th>
+            <td><input type="text" placeholder="your-email"></td>
+          </tr>
+        </table>
+      </section>
+      <section class="generated_notice">
+        <h2 class="generated_notice--ttl parts_ttl">メール(管理者用)</h2>
+        <table class="parts_table_field -copy">
+          <tr>
+            <th>件名<br>(管理者用)</th>
+            <td><input type="text" v-model="mail.subject_master"></td>
+          </tr>
+          <tr>
+            <th>送信者</th>
+            <td><input type="text" v-model="mail.email"></td>
+          </tr>
+          <tr class="flex">
+            <th>本文</th>
+            <td>
+              <textarea v-model="mail.content_master"></textarea>
+            </td>
+          </tr>
+        </table>
+      </section>
+    </div>
+  </div>
+  <script src="./js/function.js"></script>
+
+</body>
+
+</html>
